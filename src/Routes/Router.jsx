@@ -7,6 +7,12 @@ import Login from "../Pages/Home/Auth/Login/Login";
 import Register from "../Pages/Home/Auth/Register/Register";
 import PrivateRoutes from "./PrivateRoutes";
 import Rider from "../Pages/Rider/Rider";
+import SendParcel from "../Pages/SendParcel/SendParcel";
+import DashboardLayouts from "../Layouts/DashboardLayouts";
+import MyParcels from "../Pages/Dashboard/MyParcel/MyParcels";
+import Payment from "../Pages/Dashboard/Payment/Payment";
+import PaymentSuccess from "../Pages/Dashboard/Payment/PaymentSuccess";
+import Cancelled from "../Pages/Dashboard/Payment/Cancelled";
 
 const router = createBrowserRouter([
     {
@@ -16,6 +22,11 @@ const router = createBrowserRouter([
             {
                 index: true,
                 Component: Home
+            },
+            {
+                path: "/send-parcel",
+                element: <PrivateRoutes><SendParcel></SendParcel></PrivateRoutes>,
+                loader: () => fetch("/covarage.json")
             },
             {
                 path: "/covarage",
@@ -40,6 +51,29 @@ const router = createBrowserRouter([
                 path: '/register',
                 Component: Register
             }
+        ]
+    },
+    {
+        path: "/dashboard",
+        element: <PrivateRoutes><DashboardLayouts></DashboardLayouts></PrivateRoutes>,
+        children: [
+            {
+                path: '/dashboard/my-parcel',
+                Component: MyParcels
+            },
+            {
+                path: '/dashboard/payment/:parcelId',
+                Component: Payment
+            },
+            {
+                path: '/dashboard/payment-success',
+                Component: PaymentSuccess
+            },
+            {
+                path: '/dashboard/payment-cancelled',
+                Component: Cancelled
+            },
+
         ]
     }
 ])

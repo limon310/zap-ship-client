@@ -32,7 +32,7 @@ const Covarage = () => {
                 <MapContainer 
             center={position} 
             zoom={8} 
-            scrollWheelZoom={false}
+            scrollWheelZoom={true}
             className='w-full h-[800px]'
             ref={mapRef}
             >

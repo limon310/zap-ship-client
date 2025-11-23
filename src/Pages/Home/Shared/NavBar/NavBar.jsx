@@ -7,8 +7,14 @@ const NavBar = () => {
     const {user, signOutUser} = useAuth();
     const links = <>
     <li><NavLink>Services</NavLink></li>
+    <li><NavLink to="/send-parcel">Send Parcel</NavLink></li>
     <li><NavLink to="/covarage">Covarage</NavLink></li>
     <li><NavLink to="/rider">Rider</NavLink></li>
+    {
+        user?
+        <li><NavLink to="/dashboard/my-parcel">My Parcel</NavLink></li>
+        :""
+    }
     </>
 
     // sign out user
