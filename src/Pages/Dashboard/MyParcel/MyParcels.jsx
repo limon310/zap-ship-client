@@ -11,7 +11,7 @@ import { Link } from 'react-router';
 const MyParcels = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
-    const { data: parcels = [] } = useQuery({
+    const { data: parcels = [], refetch } = useQuery({
         queryKey: ['myParcel', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/parcel?email=${user?.email}`)
@@ -38,6 +38,7 @@ const MyParcels = () => {
                     .then(res => {
                         console.log(res.data);
                         if (res.data.deletedCount > 0) {
+                            refetch();
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Your file has been deleted.",

@@ -1,10 +1,12 @@
 import React from 'react';
 import { FaTruckArrowRight } from 'react-icons/fa6';
+import { RiEBike2Fill } from 'react-icons/ri';
+import { TbHistory } from 'react-icons/tb';
 import { Link, NavLink, Outlet } from 'react-router';
 
 const DashboardLayouts = () => {
     return (
-        <div>
+        <div className='w-7xl mx-auto'>
             <div className="drawer lg:drawer-open">
                 <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
@@ -41,6 +43,20 @@ const DashboardLayouts = () => {
                                  to="/dashboard/my-parcel">
                                     <FaTruckArrowRight />
                                     <span className="is-drawer-close:hidden">My Parcel</span>
+                                    </NavLink>
+                            </li>
+                            <li>
+                                <NavLink  className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History"
+                                 to="/dashboard/payment-history">
+                                    <TbHistory />
+                                    <span className="is-drawer-close:hidden">Payment History</span>
+                                    </NavLink>
+                            </li>
+                            <li>
+                                <NavLink  className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Rider Approval"
+                                 to="/dashboard/approve-rider">
+                                    <RiEBike2Fill />
+                                    <span className="is-drawer-close:hidden">Rider Approval</span>
                                     </NavLink>
                             </li>
 

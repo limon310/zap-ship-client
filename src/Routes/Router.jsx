@@ -13,6 +13,8 @@ import MyParcels from "../Pages/Dashboard/MyParcel/MyParcels";
 import Payment from "../Pages/Dashboard/Payment/Payment";
 import PaymentSuccess from "../Pages/Dashboard/Payment/PaymentSuccess";
 import Cancelled from "../Pages/Dashboard/Payment/Cancelled";
+import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
+import RiderApproval from "../Pages/Dashboard/RiderApproval/RiderApproval";
 
 const router = createBrowserRouter([
     {
@@ -35,7 +37,8 @@ const router = createBrowserRouter([
             },
             {
                 path: '/rider',
-                element: <PrivateRoutes><Rider></Rider></PrivateRoutes>
+                element: <PrivateRoutes><Rider></Rider></PrivateRoutes>,
+                loader: () => fetch("/covarage.json")
             }
         ]
     },
@@ -66,12 +69,20 @@ const router = createBrowserRouter([
                 Component: Payment
             },
             {
+                path: '/dashboard/payment-history',
+                Component: PaymentHistory
+            },
+            {
                 path: '/dashboard/payment-success',
                 Component: PaymentSuccess
             },
             {
                 path: '/dashboard/payment-cancelled',
                 Component: Cancelled
+            },
+            {
+                path: '/dashboard/approve-rider',
+                Component: RiderApproval,
             },
 
         ]
