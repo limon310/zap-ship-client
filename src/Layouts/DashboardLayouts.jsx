@@ -1,10 +1,15 @@
 import React from 'react';
+import { FaTasks, FaUser } from 'react-icons/fa';
 import { FaTruckArrowRight } from 'react-icons/fa6';
-import { RiEBike2Fill } from 'react-icons/ri';
+import { RiEBike2Fill, } from 'react-icons/ri';
 import { TbHistory } from 'react-icons/tb';
 import { Link, NavLink, Outlet } from 'react-router';
+import UseRole from '../hooks/UseRole/UseRole';
+import { MdAddTask, MdAssignmentAdd } from 'react-icons/md';
 
 const DashboardLayouts = () => {
+    const { role } = UseRole();
+    console.log("in the dashboard", role)
     return (
         <div className='w-7xl mx-auto'>
             <div className="drawer lg:drawer-open">
@@ -20,7 +25,6 @@ const DashboardLayouts = () => {
                     </nav>
                     {/* Page content here */}
                     <Outlet></Outlet>
-                    <div className="p-4">Page Content</div>
                 </div>
 
                 <div className="drawer-side is-drawer-close:overflow-visible">
@@ -39,26 +43,64 @@ const DashboardLayouts = () => {
 
                             {/* our dashboard links */}
                             <li>
-                                <NavLink  className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Parcel"
-                                 to="/dashboard/my-parcel">
+                                <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Parcel"
+                                    to="/dashboard/my-parcel">
                                     <FaTruckArrowRight />
                                     <span className="is-drawer-close:hidden">My Parcel</span>
-                                    </NavLink>
+                                </NavLink>
                             </li>
                             <li>
-                                <NavLink  className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History"
-                                 to="/dashboard/payment-history">
+                                <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History"
+                                    to="/dashboard/payment-history">
                                     <TbHistory />
                                     <span className="is-drawer-close:hidden">Payment History</span>
-                                    </NavLink>
+                                </NavLink>
                             </li>
-                            <li>
-                                <NavLink  className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Rider Approval"
-                                 to="/dashboard/approve-rider">
-                                    <RiEBike2Fill />
-                                    <span className="is-drawer-close:hidden">Rider Approval</span>
-                                    </NavLink>
-                            </li>
+                            {/* rider only links */}
+                            {
+                                role === "rider" && <>
+                                    <li>
+                                        <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Assigned Delivary"
+                                            to="/dashboard/assigned-delivary">
+                                            <FaTasks />
+                                            <span className="is-drawer-close:hidden">Assigned Delivary</span>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Completed Delivary"
+                                            to="/dashboard/completed-delivary">
+                                            <MdAddTask />
+                                            <span className="is-drawer-close:hidden">Completed Delivary</span>
+                                        </NavLink>
+                                    </li>
+                                </>
+                            }
+                            {/* admin only links */}
+                            {
+                                role === "admin" && <>
+                                    <li>
+                                        <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Rider Approval"
+                                            to="/dashboard/approve-rider">
+                                            <RiEBike2Fill />
+                                            <span className="is-drawer-close:hidden">Rider Approval</span>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Assing Rider"
+                                            to="/dashboard/assign-rider">
+                                            <MdAssignmentAdd />
+                                            <span className="is-drawer-close:hidden">Assing Rider</span>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Users Management"
+                                            to="/dashboard/users-management">
+                                            <FaUser />
+                                            <span className="is-drawer-close:hidden">Users Management</span>
+                                        </NavLink>
+                                    </li>
+                                </>
+                            }
 
                             {/* List item */}
                             <li>

@@ -18,7 +18,7 @@ const RiderApproval = () => {
     // handle approval
 
     const updateRiderStatus = (rider, status) => {
-        const updateInfo = { rider, status: status, email: rider.email }
+        const updateInfo = { status: status, email: rider.email }
         axiosSecure.patch(`/riders/${rider._id}`, updateInfo)
             .then(res => {
                 if (res.data.modifiedCount > 0) {
@@ -81,8 +81,9 @@ const RiderApproval = () => {
                             <th>Sl No.</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>District</th>
                             <th>Status</th>
-                            <th>Roll</th>
+                            <th>Working Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -93,8 +94,9 @@ const RiderApproval = () => {
                                 <th>{index + 1}</th>
                                 <td>{rider.name}</td>
                                 <td>{rider.email}</td>
+                                <td>{rider.district}</td>
                                 <td>{rider.status}</td>
-                                <td>{rider.role}</td>
+                                <td>{rider.workingStatus}</td>
                                 <td className='flex gap-3'>
                                     <button onClick={() => handleApproval(rider)} className='btn btn-square'>
                                         <FaUserCheck />

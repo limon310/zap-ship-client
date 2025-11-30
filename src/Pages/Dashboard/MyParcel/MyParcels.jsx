@@ -15,7 +15,7 @@ const MyParcels = () => {
         queryKey: ['myParcel', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/parcel?email=${user?.email}`)
-            console.log(res.data)
+            // console.log(res.data)
             return res.data
         }
     })
@@ -74,8 +74,9 @@ const MyParcels = () => {
                             <th>Sl No.</th>
                             <th>Type</th>
                             <th>Name</th>
-                            <th>Sender</th>
+                            <th>TrackingId</th>
                             <th>Payment Status</th>
+                            <th>Delivary Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -86,7 +87,10 @@ const MyParcels = () => {
                                 <td>{i + 1}</td>
                                 <td>{parcel.parcelType}</td>
                                 <td>{parcel.parcelName}</td>
-                                <td>{parcel.senderName}</td>
+                                <td>
+                                    <Link to={`/tracking/${parcel.trackingId}`}>{parcel.trackingId}
+                                </Link>
+                                </td>
                                 <td>
                                     {
                                         parcel.payment_status === 'paid'
@@ -95,6 +99,7 @@ const MyParcels = () => {
                                         // :<button onClick={handleCheckout()} className='btn btn-primary'>Pay Now</button>
                                     }
                                 </td>
+                                <td>{parcel.delivaryStatus}</td>
                                 <td className='flex gap-3'>
                                     <button className='btn btn-square hover:bg-primary'>
                                         <MdOutlinePageview />

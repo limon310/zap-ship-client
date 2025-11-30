@@ -15,6 +15,13 @@ import PaymentSuccess from "../Pages/Dashboard/Payment/PaymentSuccess";
 import Cancelled from "../Pages/Dashboard/Payment/Cancelled";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 import RiderApproval from "../Pages/Dashboard/RiderApproval/RiderApproval";
+import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
+import AdminRoutes from "./AdminRoutes/AdminRoutes";
+import AssignRider from "../Pages/Dashboard/AssignRider/AssignRider";
+import RiderRoutes from "./RiderRoutes/RiderRoutes";
+import AssignedDelivary from "../Pages/Dashboard/AssignedDelivary/AssignedDelivary";
+import CompletedDelivery from "../Pages/Dashboard/CompletedDelivery/CompletedDelivery";
+import TrackingParcel from "../Pages/TrackingParcel/TrackingParcel";
 
 const router = createBrowserRouter([
     {
@@ -39,6 +46,10 @@ const router = createBrowserRouter([
                 path: '/rider',
                 element: <PrivateRoutes><Rider></Rider></PrivateRoutes>,
                 loader: () => fetch("/covarage.json")
+            },
+            {
+                path: '/tracking/:trackingId',
+                Component: TrackingParcel
             }
         ]
     },
@@ -80,10 +91,30 @@ const router = createBrowserRouter([
                 path: '/dashboard/payment-cancelled',
                 Component: Cancelled
             },
+            // rider only routes
+            {
+                path:'/dashboard/assigned-delivary',
+                element: <RiderRoutes><AssignedDelivary></AssignedDelivary></RiderRoutes>
+                // Component: AssignedDelivary
+            },
+            {
+                path:'/dashboard/completed-delivary',
+                element: <RiderRoutes><CompletedDelivery></CompletedDelivery></RiderRoutes>
+            },
+            // admin only routes
             {
                 path: '/dashboard/approve-rider',
-                Component: RiderApproval,
+                element: <AdminRoutes><RiderApproval></RiderApproval></AdminRoutes>
             },
+            {
+                path: '/dashboard/assign-rider',
+                element: <AdminRoutes><AssignRider></AssignRider></AdminRoutes>
+            },
+            {
+                path: '/dashboard/users-management',
+                // Component: ManageUsers
+                element: <AdminRoutes><ManageUsers></ManageUsers></AdminRoutes>
+            }
 
         ]
     }
